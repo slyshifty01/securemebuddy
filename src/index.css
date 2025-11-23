@@ -1,200 +1,549 @@
-/* ===== GLOBAL COLORS ===== */
+/* ==============================
+   SecureMeBuddy Global Theme
+   ============================== */
+
 :root {
-  --navy: #0A1A2F;
-  --gold: #F5C542;
-  --light-bg: #f0f2f5;
-  --white: #ffffff;
+  /* Brand palette */
+  --sb-navy: #0a2342;
+  --sb-navy-deep: #001428;
+  --sb-gold: #ffc532;
+  --sb-gold-dark: #d19a1e;
+  --sb-bg: #f8f5ef;
+  --sb-white: #ffffff;
+  --sb-text-main: #152238;
+  --sb-text-muted: #6b7380;
+
+  --sb-success: #1db954;
+  --sb-warning: #ff7a00;
+  --sb-danger: #d83a3a;
+
+  --sb-radius-lg: 18px;
+  --sb-radius-md: 12px;
+  --sb-radius-sm: 8px;
+
+  --sb-shadow-soft: 0 18px 35px rgba(0, 20, 40, 0.12);
+  --sb-shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+  --sb-transition-fast: 0.18s ease-out;
+  --sb-transition-med: 0.28s ease-out;
 }
 
-/* ===== GLOBAL STYLES ===== */
+/* Global reset-ish */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: var(--light-bg);
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: var(--navy);
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--sb-text-main);
+
+  /* Soft gradient background */
+  background: radial-gradient(circle at top left, #fffdf6 0, var(--sb-bg) 40%, #f3f0e8 100%);
 }
 
-/* Smooth fade animation */
-.fade-in {
-  animation: fadeIn 0.6s ease-in-out;
+/* Smooth scrolling feels nicer */
+html {
+  scroll-behavior: smooth;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* ==============================
+   App Layout
+   ============================== */
 
-/* ===== APP CONTAINER ===== */
 .app-container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+  max-width: 1100px;
+  margin: 40px auto 32px;
+  padding: 20px 18px 32px;
+  background: rgba(248, 245, 239, 0.85);
+  border-radius: 28px;
+  box-shadow: var(--sb-shadow-soft);
+  position: relative;
+  overflow: hidden;
 }
 
-/* ===== HEADER ===== */
+/* Decorative blur blobs */
+.app-container::before,
+.app-container::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.app-container::before {
+  width: 260px;
+  height: 260px;
+  background: linear-gradient(135deg, var(--sb-gold), #ffe9a4);
+  top: -80px;
+  right: -60px;
+}
+
+.app-container::after {
+  width: 260px;
+  height: 260px;
+  background: linear-gradient(135deg, #4b6cb7, var(--sb-navy-deep));
+  bottom: -80px;
+  left: -60px;
+}
+
+/* ==============================
+   Header
+   ============================== */
+
 .app-header {
-  text-align: center;
-  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(10, 35, 66, 0.08);
 }
 
 .app-logo {
-  width: 90px;
-  height: auto;
-  margin-bottom: 10px;
-  animation: fadeIn 0.8s ease;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: radial-gradient(circle at 30% 20%, #fff7d0 0, var(--sb-gold) 55%, var(--sb-gold-dark) 100%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  object-fit: contain;
+  animation: logoFloat 4s ease-in-out infinite;
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 2.7rem;
-  font-weight: 800;
-  color: var(--navy);
+  font-size: 2.3rem;
+  letter-spacing: 0.03em;
+  color: var(--sb-navy-deep);
 }
 
 .app-header p {
-  font-size: 1.15rem;
-  color: #3b4a63;
+  margin: 4px 0 0;
+  font-size: 0.96rem;
+  color: var(--sb-text-muted);
 }
 
-/* ===== NAVIGATION ===== */
+/* ==============================
+   Navigation
+   ============================== */
+
 .app-nav {
+  margin-bottom: 22px;
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 25px;
   flex-wrap: wrap;
+  gap: 10px;
+  position: sticky;
+  top: 4px;
+  z-index: 20;
+  padding: 8px 6px;
+  background: rgba(248, 245, 239, 0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 999px;
+  box-shadow: var(--sb-shadow-subtle);
 }
 
 .app-nav button {
-  padding: 10px 22px;
-  border-radius: 8px;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-size: 0.9rem;
   cursor: pointer;
-  background: #d9d9d9;
-  font-weight: 700;
-  transition: 0.3s ease;
-  color: var(--navy);
+  color: var(--sb-navy);
+  transition:
+    background var(--sb-transition-fast),
+    color var(--sb-transition-fast),
+    box-shadow var(--sb-transition-fast),
+    transform var(--sb-transition-fast),
+    border-color var(--sb-transition-fast);
+}
+
+.app-nav button svg {
+  font-size: 0.95rem;
 }
 
 .app-nav button:hover {
-  background: var(--gold);
-  color: var(--navy);
+  background: rgba(10, 35, 66, 0.06);
+  box-shadow: 0 4px 10px rgba(0, 20, 40, 0.12);
+  transform: translateY(-1px);
 }
 
 .app-nav .active {
-  background: var(--navy);
-  color: var(--gold);
-  transform: scale(1.05);
+  background: var(--sb-navy);
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(0, 20, 40, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
-/* ===== MAIN CONTENT ===== */
+.app-nav .active:hover {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* ==============================
+   Main Content
+   ============================== */
+
 .app-main {
-  background: var(--white);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.96);
+  padding: 22px 20px 26px;
+  border-radius: 22px;
+  box-shadow: var(--sb-shadow-subtle);
 }
 
-/* ===== CARDS ===== */
+/* Headings inside sections */
+.app-main h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--sb-navy-deep);
+}
+
+.app-main p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ==============================
+   Cards & Grids
+   ============================== */
+
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
 }
 
 .card {
-  background: var(--white);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  background: #ffffff;
+  border-radius: var(--sb-radius-lg);
+  padding: 16px 16px 18px;
+  box-shadow: var(--sb-shadow-subtle);
+  border: 1px solid rgba(10, 35, 66, 0.06);
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
-  transition: 0.25s ease;
-  font-weight: 600;
-  border-left: 6px solid var(--gold);
+  transition:
+    transform var(--sb-transition-med),
+    box-shadow var(--sb-transition-med),
+    border-color var(--sb-transition-med);
+  animation: floatIn 0.4s ease-out;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 247, 210, 0.35), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--sb-transition-med);
+  pointer-events: none;
 }
 
 .card:hover {
-  transform: scale(1.05);
-  background: #fafafa;
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 20, 40, 0.16);
+  border-color: rgba(255, 197, 50, 0.8);
 }
 
-/* Tag label */
+.card:hover::before {
+  opacity: 1;
+}
+
+.card h3 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+/* Tag label (e.g., Beginner, MFA, etc.) */
 .tag {
-  display: inline-block;
-  padding: 4px 10px;
-  background: var(--navy);
-  color: var(--gold);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(10, 35, 66, 0.06);
+  color: var(--sb-navy);
+  margin-bottom: 6px;
 }
 
-/* ===== CHECKLISTS ===== */
+/* Checklist styles */
+.checklist-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
 .checklist-items li {
-  margin: 8px 0;
-  font-weight: 500;
+  margin: 6px 0;
+  font-size: 0.9rem;
 }
 
 input[type="checkbox"] {
-  margin-right: 10px;
+  margin-right: 8px;
+  accent-color: var(--sb-gold);
+  cursor: pointer;
 }
 
-/* ===== RISK HELPER ===== */
+/* ==============================
+   Risk Helper
+   ============================== */
+
 .question-card {
-  padding: 18px;
-  background: #eef3ff;
-  margin: 15px 0;
-  border-radius: 8px;
-  font-weight: 600;
-  border-left: 5px solid var(--navy);
+  padding: 15px 14px;
+  background: #f0f4ff;
+  margin: 10px 0;
+  border-radius: var(--sb-radius-md);
+  border: 1px solid rgba(10, 35, 66, 0.08);
+}
+
+.button-group {
+  margin-top: 8px;
 }
 
 .button-group button {
-  margin-right: 12px;
-  padding: 10px 16px;
-  border: none;
-  background: #d8d8d8;
-  border-radius: 6px;
+  margin-right: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 35, 66, 0.1);
+  background: #ffffff;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.25s ease;
+  font-size: 0.85rem;
+  transition:
+    background var(--sb-transition-fast),
+    color var(--sb-transition-fast),
+    box-shadow var(--sb-transition-fast),
+    transform var(--sb-transition-fast),
+    border-color var(--sb-transition-fast);
+}
+
+.button-group button:hover {
+  background: rgba(10, 35, 66, 0.06);
+  transform: translateY(-1px);
 }
 
 .button-group .selected {
-  background: var(--navy);
-  color: var(--gold);
-  transform: scale(1.05);
+  background: var(--sb-navy);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 18px rgba(0, 20, 40, 0.25);
 }
 
-/* Risk color boxes */
+/* Risk result box */
 .risk-result {
   margin-top: 20px;
-  padding: 18px;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 14px 16px;
+  border-radius: var(--sb-radius-md);
+  border-left: 6px solid var(--sb-gold);
+  background: #fff7d6;
+  box-shadow: var(--sb-shadow-subtle);
 }
 
+.risk-result h3 {
+  margin: 0 0 4px;
+}
+
+/* Risk variants */
 .risk-low {
-  background: #d8f8e8;
-  border-left: 6px solid #2ecc71;
+  border-left-color: var(--sb-success);
+  background: linear-gradient(135deg, #e6ffe8, #f5fff7);
 }
 
 .risk-medium {
-  background: #fff3b0;
-  border-left: 6px solid #f1c40f;
+  border-left-color: var(--sb-warning);
+  background: linear-gradient(135deg, #fff3df, #fff8ea);
 }
 
 .risk-high {
-  background: #ffe0e0;
-  border-left: 6px solid #e74c3c;
+  border-left-color: var(--sb-danger);
+  background: linear-gradient(135deg, #ffe3e3, #fff2f2);
 }
 
-/* ===== FOOTER ===== */
+/* ==============================
+   Lookup Tools
+   ============================== */
+
+.lookup-tool {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lookup-tool label {
+  font-size: 0.88rem;
+  color: var(--sb-text-muted);
+}
+
+.lookup-tool input {
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid rgba(10, 35, 66, 0.18);
+  font-size: 0.9rem;
+  outline: none;
+  transition:
+    border-color var(--sb-transition-fast),
+    box-shadow var(--sb-transition-fast),
+    background var(--sb-transition-fast);
+}
+
+.lookup-tool input:focus {
+  border-color: var(--sb-gold);
+  box-shadow: 0 0 0 2px rgba(255, 197, 50, 0.35);
+  background: #fffdf5;
+}
+
+.lookup-tool button {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: none;
+  background: var(--sb-navy);
+  color: #ffffff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    background var(--sb-transition-fast),
+    transform var(--sb-transition-fast),
+    box-shadow var(--sb-transition-fast);
+}
+
+.lookup-tool button:hover {
+  background: var(--sb-navy-deep);
+  box-shadow: 0 8px 18px rgba(0, 20, 40, 0.25);
+  transform: translateY(-1px);
+}
+
+.lookup-tool-result {
+  margin-top: 8px;
+  font-size: 0.88rem;
+}
+
+/* Status styling examples – you can apply these classes in your components */
+.lookup-ok {
+  color: var(--sb-success);
+}
+
+.lookup-warn {
+  color: var(--sb-warning);
+}
+
+.lookup-bad {
+  color: var(--sb-danger);
+}
+
+/* ==============================
+   Footer
+   ============================== */
+
 .app-footer {
   text-align: center;
-  margin-top: 30px;
-  font-size: 0.9rem;
-  color: #555;
-  font-weight: 600;
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: var(--sb-text-muted);
+}
+
+/* ==============================
+   Animations
+   ============================== */
+
+.fade-in {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes logoFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ==============================
+   Responsive tweaks
+   ============================== */
+
+@media (max-width: 768px) {
+  .app-container {
+    margin: 18px 10px 24px;
+    padding: 14px 12px 22px;
+  }
+
+  .app-header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .app-main {
+    padding: 16px 14px 20px;
+  }
+
+  .app-nav {
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .app-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .app-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
 }

@@ -3,14 +3,37 @@ import {
   FaHome,
   FaBookOpen,
   FaClipboardCheck,
-  FaShieldAlt
+  FaShieldAlt,
+  FaExclamationTriangle,
+  FaListAlt,
+  FaGraduationCap,
+  FaToolbox,
+  FaUserShield,
+  FaSearch,          // NEW icon for Lookup Tools
 } from "react-icons/fa";
+
+import HomeSection from "./Components/HomeSection";
+import LearnSection from "./Components/LearnSection";
+import ChecklistSection from "./Components/ChecklistSection";
+import RiskHelper from "./Components/RiskHelper";
+import ScamReportsSection from "./Components/ScamReportsSection";
+import GlossarySection from "./Components/GlossarySection";
+import GuidesSection from "./Components/GuidesSection";
+import SoftwareSection from "./Components/SoftwareSection";
+import PrivacyCenterSection from "./Components/PrivacyCenterSection";
+import LookupToolsSection from "./Components/LookupToolsSection"; // NEW
 
 const SECTIONS = {
   HOME: "HOME",
   LEARN: "LEARN",
   CHECKLISTS: "CHECKLISTS",
   RISK_HELPER: "RISK_HELPER",
+  SCAM_REPORTS: "SCAM_REPORTS",
+  GLOSSARY: "GLOSSARY",
+  GUIDES: "GUIDES",
+  SOFTWARE: "SOFTWARE",
+  PRIVACY: "PRIVACY",
+  LOOKUP_TOOLS: "LOOKUP_TOOLS",   // NEW
 };
 
 // ================= LESSONS =================
@@ -96,7 +119,6 @@ function App() {
     });
   };
 
-  // ================= RISK CALCULATOR =================
   const calculateRisk = () => {
     const { hasStrongPasswords, uses2FA, clicksUnknownLinks, sharesDevice } =
       riskAnswers;
@@ -120,7 +142,10 @@ function App() {
     if (sharesDevice) score += 2;
 
     if (score <= 2)
-      return { label: "Low Risk", message: "Your habits look good — keep it up!" };
+      return {
+        label: "Low Risk",
+        message: "Your habits look good — keep it up!",
+      };
 
     if (score <= 5)
       return {
@@ -148,32 +173,117 @@ function App() {
 
       {/* NAVIGATION */}
       <nav className="app-nav">
-        <button className={activeSection === SECTIONS.HOME ? "active" : ""} onClick={() => setActiveSection(SECTIONS.HOME)}>
+        <button
+          className={activeSection === SECTIONS.HOME ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.HOME)}
+        >
           <FaHome /> Home
         </button>
-        <button className={activeSection === SECTIONS.LEARN ? "active" : ""} onClick={() => setActiveSection(SECTIONS.LEARN)}>
+
+        <button
+          className={activeSection === SECTIONS.LEARN ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.LEARN)}
+        >
           <FaBookOpen /> Learn
         </button>
-        <button className={activeSection === SECTIONS.CHECKLISTS ? "active" : ""} onClick={() => setActiveSection(SECTIONS.CHECKLISTS)}>
+
+        <button
+          className={activeSection === SECTIONS.CHECKLISTS ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.CHECKLISTS)}
+        >
           <FaClipboardCheck /> Checklists
         </button>
-        <button className={activeSection === SECTIONS.RISK_HELPER ? "active" : ""} onClick={() => setActiveSection(SECTIONS.RISK_HELPER)}>
+
+        <button
+          className={activeSection === SECTIONS.RISK_HELPER ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.RISK_HELPER)}
+        >
           <FaShieldAlt /> Risk Helper
+        </button>
+
+        <button
+          className={activeSection === SECTIONS.SCAM_REPORTS ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.SCAM_REPORTS)}
+        >
+          <FaExclamationTriangle /> Scam Reports
+        </button>
+
+        <button
+          className={activeSection === SECTIONS.GLOSSARY ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.GLOSSARY)}
+        >
+          <FaListAlt /> Glossary
+        </button>
+
+        <button
+          className={activeSection === SECTIONS.GUIDES ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.GUIDES)}
+        >
+          <FaGraduationCap /> Guides
+        </button>
+
+        <button
+          className={activeSection === SECTIONS.SOFTWARE ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.SOFTWARE)}
+        >
+          <FaToolbox /> Software
+        </button>
+
+        <button
+          className={activeSection === SECTIONS.PRIVACY ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.PRIVACY)}
+        >
+          <FaUserShield /> Privacy Center
+        </button>
+
+        {/* NEW: LOOKUP TOOLS */}
+        <button
+          className={activeSection === SECTIONS.LOOKUP_TOOLS ? "active" : ""}
+          onClick={() => setActiveSection(SECTIONS.LOOKUP_TOOLS)}
+        >
+          <FaSearch /> Lookup Tools
         </button>
       </nav>
 
       {/* MAIN CONTENT */}
       <main className="app-main fade-in">
         {activeSection === SECTIONS.HOME && <HomeSection />}
+
         {activeSection === SECTIONS.LEARN && (
-          <LearnSection lessons={lessons} selectedLesson={selectedLesson} onSelectLesson={setSelectedLesson} />
+          <LearnSection
+            lessons={lessons}
+            selectedLesson={selectedLesson}
+            onSelectLesson={setSelectedLesson}
+          />
         )}
+
         {activeSection === SECTIONS.CHECKLISTS && (
-          <ChecklistSection checklists={checklists} checklistProgress={checklistProgress} onToggleItem={handleChecklistToggle} />
+          <ChecklistSection
+            checklists={checklists}
+            checklistProgress={checklistProgress}
+            onToggleItem={handleChecklistToggle}
+          />
         )}
+
         {activeSection === SECTIONS.RISK_HELPER && (
-          <RiskHelper riskAnswers={riskAnswers} setRiskAnswers={setRiskAnswers} riskResult={riskResult} />
+          <RiskHelper
+            riskAnswers={riskAnswers}
+            setRiskAnswers={setRiskAnswers}
+            riskResult={riskResult}
+          />
         )}
+
+        {activeSection === SECTIONS.SCAM_REPORTS && <ScamReportsSection />}
+
+        {activeSection === SECTIONS.GLOSSARY && <GlossarySection />}
+
+        {activeSection === SECTIONS.GUIDES && <GuidesSection />}
+
+        {activeSection === SECTIONS.SOFTWARE && <SoftwareSection />}
+
+        {activeSection === SECTIONS.PRIVACY && <PrivacyCenterSection />}
+
+        {activeSection === SECTIONS.LOOKUP_TOOLS && <LookupToolsSection />}
       </main>
 
       {/* FOOTER */}
@@ -181,144 +291,6 @@ function App() {
         <small>SecureMeBuddy © 2025</small>
       </footer>
     </div>
-  );
-}
-
-// ================= COMPONENTS =================
-
-function HomeSection() {
-  return (
-    <section className="fade-in">
-      <h2>Welcome</h2>
-      <p>
-        SecureMeBuddy is designed for people who say{" "}
-        <strong>“I'm not good with technology.”</strong>
-        Learn simple ways to stay safe online — without the tech jargon.
-      </p>
-    </section>
-  );
-}
-
-function LearnSection({ lessons, selectedLesson, onSelectLesson }) {
-  if (selectedLesson) {
-    return (
-      <section className="fade-in">
-        <button onClick={() => onSelectLesson(null)}>← Back</button>
-        <h2>{selectedLesson.title}</h2>
-        <p><em>{selectedLesson.level}</em></p>
-        <ol>
-          {selectedLesson.content.map((step, index) => (
-            <li key={index}>{step}</li>
-          ))}
-        </ol>
-      </section>
-    );
-  }
-
-  return (
-    <section className="fade-in">
-      <h2>Learn the Basics</h2>
-      <div className="card-grid">
-        {lessons.map((lesson) => (
-          <article key={lesson.id} className="card" onClick={() => onSelectLesson(lesson)}>
-            <h3>{lesson.title}</h3>
-            <p className="tag">{lesson.level}</p>
-            <p>{lesson.summary}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ChecklistSection({ checklists, checklistProgress, onToggleItem }) {
-  return (
-    <section className="fade-in">
-      <h2>Safety Checklists</h2>
-      <div className="card-grid">
-        {checklists.map((list) => {
-          const completed = checklistProgress[list.id]?.length || 0;
-          const total = list.items.length;
-
-          return (
-            <article key={list.id} className="card checklist-card">
-              <h3>{list.title}</h3>
-              <p>{list.description}</p>
-              <p>Progress: {completed} / {total}</p>
-
-              <ul className="checklist-items">
-                {list.items.map((item, index) => (
-                  <li key={index}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={checklistProgress[list.id]?.includes(index) || false}
-                        onChange={() => onToggleItem(list.id, index)}
-                      />
-                      {item}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function RiskHelper({ riskAnswers, setRiskAnswers, riskResult }) {
-  const Question = ({ text, field, yes = "Yes", no = "No" }) => (
-    <div className="question-card">
-      <p>{text}</p>
-      <div className="button-group">
-        <button
-          className={riskAnswers[field] === true ? "selected" : ""}
-          onClick={() => setRiskAnswers({ ...riskAnswers, [field]: true })}
-        >
-          {yes}
-        </button>
-        <button
-          className={riskAnswers[field] === false ? "selected" : ""}
-          onClick={() => setRiskAnswers({ ...riskAnswers, [field]: false })}
-        >
-          {no}
-        </button>
-      </div>
-    </div>
-  );
-
-  return (
-    <section className="fade-in">
-      <h2>Risk Helper</h2>
-
-      <Question text="Do you use strong passwords?" field="hasStrongPasswords" />
-      <Question text="Do you use 2FA on important accounts?" field="uses2FA" />
-      <Question
-        text="Do you click links you're unsure of?"
-        field="clicksUnknownLinks"
-        yes="Yes, sometimes"
-        no="No, I'm careful"
-      />
-      <Question text="Does anyone else use your device?" field="sharesDevice" />
-
-      <div
-        className={
-          "risk-result " +
-          (riskResult.label === "Low Risk"
-            ? "risk-low"
-            : riskResult.label === "Medium Risk"
-            ? "risk-medium"
-            : riskResult.label === "High Risk"
-            ? "risk-high"
-            : "")
-        }
-      >
-        <h3>{riskResult.label}</h3>
-        <p>{riskResult.message}</p>
-      </div>
-    </section>
   );
 }
 
