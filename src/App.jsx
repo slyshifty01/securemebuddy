@@ -1,18 +1,12 @@
 // src/App.jsx
-// Full routing for SecureMeBuddy — Public website + Dashboard
+// Master Routing for SecureMeBuddy – Public Site + Secure Dashboard
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-// Public Landing Page
+// Public
 import LandingPage from "./landing/LandingPage.jsx";
 
-// Legal Pages
-import { PrivacyPage } from "./legal/PrivacyPage.jsx";
-import { TermsPage } from "./legal/TermsPage.jsx";
-import { ContactPage } from "./legal/ContactPage.jsx";
-import { TrustCenterPage } from "./legal/TrustCenterPage.jsx";
-
-// Dashboard Layout
+// Dashboard
 import DashboardLayout from "./dashboard/layouts/DashboardLayout.jsx";
 
 // Dashboard Pages
@@ -28,48 +22,28 @@ export default function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* ===========================
-            PUBLIC LANDING PAGE
-        ============================ */}
+        {/* PUBLIC SITE */}
         <Route path="/" element={<LandingPage />} />
 
-        {/* ===========================
-            PUBLIC LEGAL PAGES
-        ============================ */}
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/trust" element={<TrustCenterPage />} />
-
-        {/* ===========================
-            SECURE DASHBOARD
-        ============================ */}
+        {/* SECURE DASHBOARD */}
         <Route path="/secure/dashboard" element={<DashboardLayout />}>
-
-          {/* Default Dashboard Route */}
           <Route index element={<OverviewPage />} />
 
-          {/* Dashboard Pages */}
           <Route path="overview" element={<OverviewPage />} />
           <Route path="users" element={<UsersPage />} />
           <Route path="affiliates" element={<AffiliatesPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="safety" element={<SafetyCheckersPage />} />
           <Route path="api-keys" element={<ApiKeysPage />} />
-
         </Route>
 
-        {/* ===========================
-            LEGACY REDIRECTS
-        ============================ */}
+        {/* LEGACY REDIRECTS */}
         <Route
           path="/dashboard/*"
           element={<Navigate to="/secure/dashboard" replace />}
         />
 
-        {/* ===========================
-            CATCH-ALL → HOME
-        ============================ */}
+        {/* 404 → Home */}
         <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>
