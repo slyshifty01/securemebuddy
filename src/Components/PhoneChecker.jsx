@@ -1,42 +1,49 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 
 export default function PhoneChecker() {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  // 🔵 RATE-LIMIT CHECK
+  // Persistent device/user ID
+  const userId =
+    localStorage.getItem("smb_user_id") || crypto.randomUUID();
+  localStorage.setItem("smb_user_id", userId);
+
+  // Rate limit check
   async function checkLimit() {
     const endpoint =
       "https://fbqidnsnhhjaabynxdjd.supabase.co/functions/v1/verify-lookup-limit";
 
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: userId,
+        limit: 25,
+      }),
+    });
+
     const data = await response.json();
     return data.allowed;
   }
 
-  // 🔵 LOG LOOKUP
-  async function logLookup(phoneValue) {
-    await supabase.from("lookup_logs").insert({
-      ip_address: "client-ip",
-      lookup_type: "phone",
-      searched_value: phoneValue,
-    });
-  }
+  // Basic phone validation
+  function validatePhone(input) {
+    const digits = input.replace(/\D/g, "");
 
-  // 🔵 SIMPLE PHONE SANITY CHECK
-  function validatePhone(num) {
-    const clean = num.replace(/\D/g, ""); // remove non-digits
-
-    if (clean.length < 10 || clean.length > 15) {
+    if (digits.length < 10 || digits.length > 15) {
       return { valid: false };
     }
 
+    let country = "Unknown";
+    if (digits.startsWith("1")) country = "USA / Canada";
+
     return {
       valid: true,
-      digits: clean,
-      possibleCountry: clean.length === 11 && clean.startsWith("1") ? "USA" : "Unknown",
+      digits,
+      country,
     };
   }
 
@@ -48,7 +55,6 @@ export default function PhoneChecker() {
       return;
     }
 
-    // 1️⃣ RATE LIMIT
     const allowed = await checkLimit();
     if (!allowed) {
       setResult({
@@ -60,16 +66,18 @@ export default function PhoneChecker() {
 
     setLoading(true);
 
-    // 2️⃣ VALIDATE
-    const res = validatePhone(phone);
+    const check = validatePhone(phone);
 
-    // 3️⃣ LOG LOOKUP
-    await logLookup(phone);
+    // Log to Supabase
+    await supabase.from("lookup_logs").insert({
+      user_id: userId,
+      lookup_type: "phone",
+      value: phone,
+      is_safe: check.valid,
+    });
 
     setLoading(false);
-
-    // 4️⃣ SAVE RESULT
-    setResult(res);
+    setResult(check);
   }
 
   return (
@@ -93,6 +101,7 @@ export default function PhoneChecker() {
         />
 
         <button
+          type="button"
           onClick={handleCheck}
           style={{
             padding: "10px 20px",
@@ -120,17 +129,19 @@ export default function PhoneChecker() {
               <p style={{ color: "red", fontWeight: "bold" }}>{result.error}</p>
             )}
 
-            {result.valid && !result.error && (
-              <>
-                <p><strong>Digits:</strong> {result.digits}</p>
-                <p><strong>Possible Country:</strong> {result.possibleCountry}</p>
-              </>
+            {!result.error && !result.valid && (
+              <p style={{ color: "red" }}>❌ Invalid phone number.</p>
             )}
 
-            {!result.valid && !result.error && (
-              <p style={{ color: "red" }}>
-                ❌ Not a valid phone number format.
-              </p>
+            {result.valid && !result.error && (
+              <>
+                <p>
+                  <strong>Digits:</strong> {result.digits}
+                </p>
+                <p>
+                  <strong>Possible Country:</strong> {result.country}
+                </p>
+              </>
             )}
           </div>
         )}

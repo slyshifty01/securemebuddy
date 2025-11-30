@@ -1,0 +1,110 @@
+/* Shared popup styling for all SecureMeBuddy popups */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 15, 40, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-box {
+  background: #0b1220;
+  color: #f9fafb;
+  border-radius: 18px;
+  padding: 24px 22px;
+  width: min(420px, 92vw);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  animation: popup-fade-in 0.25s ease-out, popup-slide-up 0.25s ease-out;
+}
+
+.popup-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.popup-title span.highlight {
+  color: #38bdf8; /* cyan accent */
+}
+
+.popup-body {
+  font-size: 0.95rem;
+  color: #e5e7eb;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.popup-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.popup-primary-btn,
+.popup-secondary-btn {
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.12s ease, color 0.12s ease;
+}
+
+.popup-primary-btn {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: #0b1120;
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
+}
+
+.popup-primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.5);
+}
+
+.popup-secondary-btn {
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.popup-secondary-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 23, 42, 1);
+}
+
+/* Small text helper */
+.popup-caption {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.4rem;
+}
+
+/* Animations */
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popup-slide-up {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

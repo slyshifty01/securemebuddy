@@ -1,0 +1,19 @@
+/* HomePage general layout */
+.homepage-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content area */
+.homepage-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Optional spacing */
+section {
+  margin-bottom: 3rem;
+}

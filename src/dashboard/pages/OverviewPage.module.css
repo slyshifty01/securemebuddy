@@ -1,0 +1,59 @@
+.page-container {
+  padding: 40px;
+  color: white;
+}
+
+/* Subtitle */
+.subtitle {
+  color: #ff99ff;
+  margin-top: 5px;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  padding: 25px;
+  text-align: center;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff1aff;
+}
+
+.stat-number {
+  font-size: 42px;
+  font-weight: bold;
+  color: #ff66ff;
+  text-shadow: 0 0 10px #ff00ff, 0 0 18px #ff1aff;
+}
+
+.stat-label {
+  color: #ffc6ff;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+/* Activity Section */
+.section-title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.activity-list {
+  padding: 25px;
+  border-radius: 12px;
+  line-height: 1.8;
+  font-size: 18px;
+}

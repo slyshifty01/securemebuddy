@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/secure/:path*",
+      "destination": "/"
+    }
+  ]
+}

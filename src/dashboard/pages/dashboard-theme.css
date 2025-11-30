@@ -1,0 +1,80 @@
+.neon-title {
+  font-size: 32px;
+  color: #ff66ff;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff33ff;
+  margin-bottom: 30px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.neon-card {
+  padding: 20px;
+  border: 1px solid #ff00ff;
+  background: rgba(255, 0, 255, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 0 15px #ff00ff;
+  text-align: center;
+  transition: 0.25s;
+}
+
+.neon-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #ff00ff;
+}
+
+.neon-card-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff66ff;
+}
+
+.neon-card-label {
+  margin-top: 5px;
+  color: #ffc6ff;
+}
+
+.neon-section {
+  margin-top: 40px;
+}
+
+.neon-subtitle {
+  font-size: 22px;
+  color: #ff99ff;
+  margin-bottom: 15px;
+}
+
+.safety-score {
+  font-size: 40px;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+.neon-list li {
+  margin: 5px 0;
+}
+
+.hour-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 5px;
+}
+
+.hour-cell {
+  padding: 10px;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #ff00ff22;
+}
+
+.hour-label {
+  font-size: 12px;
+}
+
+.hour-count {
+  font-weight: bold;
+  margin-top: 5px;
+}

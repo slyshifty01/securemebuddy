@@ -1,31 +1,35 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 
 export default function EmailChecker() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  // 🔵 RATE-LIMIT CHECK
+  // Persistent device/user ID
+  const userId =
+    localStorage.getItem("smb_user_id") || crypto.randomUUID();
+  localStorage.setItem("smb_user_id", userId);
+
+  // Rate limit check
   async function checkLimit() {
     const endpoint =
       "https://fbqidnsnhhjaabynxdjd.supabase.co/functions/v1/verify-lookup-limit";
 
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: userId,
+        limit: 25,
+      }),
+    });
+
     const data = await response.json();
     return data.allowed;
   }
 
-  // 🔵 LOG LOOKUP
-  async function logLookup(emailValue) {
-    await supabase.from("lookup_logs").insert({
-      ip_address: "client-ip",
-      lookup_type: "email",
-      searched_value: emailValue,
-    });
-  }
-
-  // 🔵 VALIDATE EMAIL FORMAT
+  // Email validation
   function validateEmail(em) {
     const simpleRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,10 +42,7 @@ export default function EmailChecker() {
     return {
       valid: true,
       domain,
-      isFreeProvider:
-        ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"].includes(
-          domain
-        ),
+      isFreeProvider: ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"].includes(domain),
     };
   }
 
@@ -53,7 +54,6 @@ export default function EmailChecker() {
       return;
     }
 
-    // 1️⃣ RATE LIMIT
     const allowed = await checkLimit();
     if (!allowed) {
       setResult({
@@ -65,16 +65,18 @@ export default function EmailChecker() {
 
     setLoading(true);
 
-    // 2️⃣ VALIDATE
-    const res = validateEmail(email);
+    const check = validateEmail(email);
 
-    // 3️⃣ LOG LOOKUP
-    await logLookup(email);
+    // Log to Supabase
+    await supabase.from("lookup_logs").insert({
+      user_id: userId,
+      lookup_type: "email",
+      value: email,
+      is_safe: check.valid,
+    });
 
     setLoading(false);
-
-    // 4️⃣ SAVE RESULT
-    setResult(res);
+    setResult(check);
   }
 
   return (
@@ -97,7 +99,9 @@ export default function EmailChecker() {
           }}
         />
 
+        {/* FIXED: ensure handleCheck fires */}
         <button
+          type="button"
           onClick={handleCheck}
           style={{
             padding: "10px 20px",
@@ -125,20 +129,22 @@ export default function EmailChecker() {
               <p style={{ color: "red", fontWeight: "bold" }}>{result.error}</p>
             )}
 
-            {result.valid && !result.error && (
-              <>
-                <p><strong>Domain:</strong> {result.domain}</p>
-                <p>
-                  <strong>Free Email Provider:</strong>{" "}
-                  {result.isFreeProvider ? "Yes" : "No"}
-                </p>
-              </>
-            )}
-
-            {!result.valid && !result.error && (
+            {!result.error && !result.valid && (
               <p style={{ color: "red" }}>
                 ❌ Invalid email format. Please check again.
               </p>
+            )}
+
+            {result.valid && !result.error && (
+              <>
+                <p>
+                  <strong>Domain:</strong> {result.domain}
+                </p>
+                <p>
+                  <strong>Free Provider:</strong>{" "}
+                  {result.isFreeProvider ? "Yes" : "No"}
+                </p>
+              </>
             )}
           </div>
         )}

@@ -1,0 +1,58 @@
+/* src/dashboard/components/Topbar.css */
+/* Modern neon glassmorphic topbar */
+
+.topbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: rgba(15, 15, 25, 0.68);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.12);
+}
+
+.topbar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  opacity: 0.95;
+  letter-spacing: 0.4px;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topbar-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e8e8ec;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.topbar-icon-btn:hover {
+  background: rgba(168, 85, 247, 0.22);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+.user-btn {
+  border: 1px solid rgba(168, 85, 247, 0.28);
+}
+
+.user-btn:hover {
+  background: rgba(168, 85, 247, 0.4);
+}

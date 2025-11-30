@@ -1,0 +1,39 @@
+[functions]
+
+[functions.email-safety]
+verify_jwt = false
+entrypoint = "./functions/email-safety/index.ts"
+import_map = "./functions/email-safety/import_map.json"
+
+[functions.phone-safety]
+verify_jwt = false
+entrypoint = "./functions/phone-safety/index.ts"
+import_map = "./functions/phone-safety/import_map.json"
+
+[functions.url-safety]
+verify_jwt = false
+entrypoint = "./functions/url-safety/index.ts"
+import_map = "./functions/url-safety/import_map.json"
+
+[functions.secure-check]
+verify_jwt = false
+entrypoint = "./functions/secure-check/index.ts"
+import_map = "./functions/secure-check/import_map.json"
+
+[functions.verify-lookup-limit]
+verify_jwt = false
+entrypoint = "./functions/verify-lookup-limit/index.ts"
+import_map = "./functions/verify-lookup-limit/import_map.json"
+
+[functions.lookup-stats]
+verify_jwt = false
+entrypoint = "./functions/lookup-stats/index.ts"
+import_map = "./functions/lookup-stats/import_map.json"
+
+[functions.generate-api-key]
+verify_jwt = false
+entrypoint = "./functions/generate-api-key/index.ts"
+import_map = "./functions/generate-api-key/import_map.json"
+
+
+

@@ -1,4 +1,5 @@
-function LearnSection({ lessons, selectedLesson, onSelectLesson }) {
+function LearnSection({ lessons = [], selectedLesson, onSelectLesson }) {
+  // If a specific lesson is selected, show lesson details
   if (selectedLesson) {
     return (
       <section className="fade-in">
@@ -8,7 +9,7 @@ function LearnSection({ lessons, selectedLesson, onSelectLesson }) {
           <em>{selectedLesson.level}</em>
         </p>
         <ol>
-          {selectedLesson.content.map((step, index) => (
+          {(selectedLesson.content ?? []).map((step, index) => (
             <li key={index}>{step}</li>
           ))}
         </ol>
@@ -20,7 +21,7 @@ function LearnSection({ lessons, selectedLesson, onSelectLesson }) {
     <section className="fade-in">
       <h2>Learn the Basics</h2>
       <div className="card-grid">
-        {lessons.map((lesson) => (
+        {(lessons ?? []).map((lesson) => (
           <article
             key={lesson.id}
             className="card"

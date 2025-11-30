@@ -1,0 +1,114 @@
+/* Hybrid neon + modern panel UI for Safety Checkers */
+
+.safety-page {
+  padding: 20px;
+}
+
+.safety-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.safety-header p {
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+/* Grid layout */
+.safety-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 22px;
+}
+
+/* Glowing cards */
+.checker-card {
+  background: rgba(15, 15, 20, 0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.14);
+}
+
+.checker-header h2 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.checker-header p {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-bottom: 16px;
+}
+
+/* Input row */
+.checker-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.checker-input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  outline: none;
+}
+
+.checker-input:focus {
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3);
+}
+
+.checker-btn {
+  padding: 10px 14px;
+  background: linear-gradient(90deg, #a855f7, #06b6d4);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.checker-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+.checker-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Results */
+.checker-result {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* SAFE glow */
+.safe-glow {
+  background: rgba(0, 255, 180, 0.1);
+  border: 1px solid rgba(0, 255, 180, 0.4);
+  box-shadow: 0 0 14px rgba(0, 255, 180, 0.25);
+}
+
+/* RISKY glow */
+.risky-glow {
+  background: rgba(255, 0, 128, 0.12);
+  border: 1px solid rgba(255, 0, 128, 0.35);
+  box-shadow: 0 0 16px rgba(255, 0, 128, 0.3);
+}
+
+.checker-error {
+  color: #ff6b6b;
+  margin-top: 8px;
+}

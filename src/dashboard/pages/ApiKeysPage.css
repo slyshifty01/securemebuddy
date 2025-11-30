@@ -1,0 +1,159 @@
+/* Hybrid Neon + Modern API Key Page Styles */
+
+.apikeys-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.apikeys-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.apikeys-header p {
+  opacity: 0.8;
+  margin-bottom: 18px;
+}
+
+.apikey-generate-btn {
+  background: linear-gradient(90deg, #a855f7, #06b6d4);
+  border: none;
+  padding: 12px 20px;
+  font-weight: 600;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 18px;
+  transition: 0.2s;
+}
+
+.apikey-generate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+.apikey-generate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.apikey-error {
+  color: #ff5f80;
+  margin-bottom: 12px;
+}
+
+.apikey-list-panel {
+  background: rgba(15, 15, 25, 0.55);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.14);
+}
+
+.apikey-placeholder {
+  opacity: 0.75;
+}
+
+/* Table */
+.apikey-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e5e5e5;
+}
+
+.apikey-table th,
+.apikey-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.apikey-table th {
+  opacity: 0.85;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.truncate {
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Status Badges */
+.badge-active {
+  padding: 6px 12px;
+  background: rgba(0, 255, 180, 0.12);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 180, 0.4);
+  color: #00f7a7;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 0 8px rgba(0, 255, 180, 0.25);
+}
+
+.badge-revoked {
+  padding: 6px 12px;
+  background: rgba(255, 0, 128, 0.12);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 0, 128, 0.35);
+  color: #ff4fa3;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 0 8px rgba(255, 0, 128, 0.25);
+}
+
+/* Actions */
+.actions-col {
+  width: 120px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.icon-btn:hover {
+  background: rgba(168, 85, 247, 0.22);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+.icon-btn.danger:hover {
+  background: rgba(255, 0, 128, 0.22);
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.3);
+}
+
+/* Copy Popup */
+.copy-popup {
+  position: absolute;
+  top: -24px;
+  right: 0;
+  background: rgba(0, 255, 180, 0.3);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: #fff;
+  animation: fadeOut 1.2s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}

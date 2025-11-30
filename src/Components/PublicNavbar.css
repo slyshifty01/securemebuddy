@@ -1,0 +1,55 @@
+.public-navbar {
+  background: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-logo {
+  height: 50px;
+}
+
+.nav-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-subtitle {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #555;
+}
+
+.nav-links {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: #333;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-links a:hover {
+  background: #f2f2f2;
+  color: #000;
+}

@@ -1,0 +1,47 @@
+/* src/dashboard/layouts/DashboardLayout.css */
+/* Overall dashboard layout (shell around sidebar + main content) */
+
+.dashboard-shell {
+  display: flex;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1f0933 0, #05030a 45%, #020008 100%);
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Right side main area */
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Topbar row */
+.dashboard-topbar {
+  height: 56px;
+  padding: 12px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 20, 0.85),
+    rgba(10, 10, 25, 0.85)
+  );
+}
+
+/* Inner content area */
+.dashboard-main-inner {
+  flex: 1;
+  padding: 24px 28px;
+  overflow: auto;
+}
+
+/* Optional: make inner pages a little centered on large screens */
+.dashboard-page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
