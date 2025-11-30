@@ -13,6 +13,14 @@ export default function LandingPage() {
       ======================================= */}
       <section className="landing-hero">
         <div className="hero-inner">
+
+          {/* LOGO ADDED HERE */}
+          <img 
+            src="/logo.png" 
+            alt="SecureMeBuddy Logo" 
+            className="landing-logo"
+          />
+
           <div className="hero-eyebrow">Friendly online safety tools</div>
 
           <h1>Stay Safer Online With SecureMeBuddy</h1>
