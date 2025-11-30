@@ -1,21 +1,48 @@
 /* ============================================================
-   SECUREMEBUDDY — Brand Hybrid Theme (Modern + Friendly)
+   SECUREMEBUDDY — Premium Hybrid Theme
+   D: Cream Hero → White Body
+   C: Friendly + Professional Hybrid
    ============================================================ */
 
-/* Global Container */
+/* GLOBAL */
 .landing-container {
   font-family: "Inter", system-ui, sans-serif;
-  background: linear-gradient(180deg, #fffbf2 0%, #ffffff 100%);
-  color: #1a2b45;
-  padding-bottom: 60px;
+  background: #ffffff;
+  color: #0A1A2F; /* Deep navy brand */
 }
 
 /* ============================================================
-   HERO SECTION
+   HERO SECTION (CREAM + GOLD GLOW)
    ============================================================ */
+
 .landing-hero {
-  padding: 90px 20px 70px;
+  padding: 100px 20px 80px;
+  background: linear-gradient(
+    180deg,
+    #fff8e8 0%,
+    #fff3d8 35%,
+    #ffffff 100%
+  );
   text-align: center;
+  position: relative;
+}
+
+/* Soft gold glow behind hero */
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 214, 110, 0.25),
+    rgba(255, 214, 110, 0) 70%
+  );
+  filter: blur(60px);
+  z-index: -1;
 }
 
 .hero-inner {
@@ -26,154 +53,165 @@
 /* Eyebrow Tag */
 .hero-eyebrow {
   display: inline-block;
-  padding: 6px 14px;
-  margin-bottom: 18px;
-  background: #f7e6b5;
-  color: #7a5a1a;
-  font-size: 0.9rem;
+  padding: 6px 16px;
+  margin-bottom: 20px;
+  background: #ffe8b0;
+  color: #8a6b1f;
   border-radius: 999px;
-  border: 1px solid #f3cc68;
+  font-size: 0.9rem;
+  border: 1px solid #f5c86d;
+  font-weight: 600;
 }
 
-/* Main Heading */
+/* MAIN TITLE */
 .landing-hero h1 {
-  font-size: 3rem;
-  color: #1a2b45;
+  font-size: 3.2rem;
   font-weight: 800;
-  margin-bottom: 18px;
+  color: #0A1A2F;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
 }
 
-/* Subtext */
+/* SUBTEXT */
 .hero-subtext {
-  max-width: 700px;
-  margin: 0 auto 28px;
-  font-size: 1.15rem;
+  max-width: 760px;
+  margin: 0 auto 32px;
+  font-size: 1.2rem;
+  color: #1c1c1c;
   line-height: 1.7;
-  color: #2f2f2f;
 }
 
-/* Badges */
+/* BADGES */
 .hero-badges {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
 .hero-badge {
-  padding: 7px 14px;
+  padding: 8px 16px;
   font-size: 0.9rem;
-  border-radius: 999px;
-  background: #e7edff;
+  background: #e8edff;
   color: #1e3a8a;
   border: 1px solid rgba(30, 64, 175, 0.25);
+  border-radius: 999px;
   font-weight: 500;
 }
 
 .hero-badge-gold {
-  background: #f7e6b5;
-  color: #7c651c;
-  border-color: #f3cc68;
+  background: #ffe5a3;
+  color: #8a6b1f;
+  border-color: #f5c86d;
 }
 
-/* Buttons */
+/* BUTTONS */
 .hero-buttons {
   display: flex;
   justify-content: center;
-  gap: 18px;
-  margin-top: 10px;
+  gap: 20px;
 }
 
 .hero-btn-primary {
-  padding: 14px 28px;
-  background: #1e40af;
-  color: #fff;
-  border-radius: 10px;
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #1E40AF, #1A2B45);
+  color: white;
+  border-radius: 12px;
   font-size: 1rem;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(30, 64, 175, 0.25);
-  transition: 0.25s ease;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(10, 26, 47, 0.25);
+  transition: all 0.25s ease;
 }
 
 .hero-btn-primary:hover {
-  background: #1a379c;
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10, 26, 47, 0.3);
 }
 
 .hero-btn-secondary {
-  padding: 14px 28px;
+  padding: 14px 30px;
+  background: #ffffff;
+  color: #1E40AF;
+  border: 2px solid #1E40AF;
+  border-radius: 12px;
   font-size: 1rem;
-  background: #f5f7fa;
-  color: #1e40af;
-  border: 1px solid rgba(30, 64, 175, 0.25);
-  border-radius: 10px;
+  font-weight: 600;
   text-decoration: none;
-  transition: 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .hero-btn-secondary:hover {
-  background: #e7ecf6;
+  background: #eef3ff;
   transform: translateY(-2px);
 }
 
 /* ============================================================
-   FEATURES SECTION
+   FEATURES — Sharp, Friendly Cards
    ============================================================ */
+
 .landing-features {
-  padding: 70px 20px;
+  padding: 90px 20px;
   background: #ffffff;
 }
 
 .landing-features h2 {
-  font-size: 2.3rem;
   text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0A1A2F;
   margin-bottom: 50px;
-  font-weight: 700;
-  color: #1a2b45;
 }
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .feature-card {
   background: #ffffff;
-  padding: 26px 24px 30px;
-  border-radius: 16px;
+  padding: 32px 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.1);
 }
 
 .feature-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  margin-bottom: 14px;
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+/* ICONS (RICH GOLD GRADIENTS) */
 .feature-icon-email {
-  background: linear-gradient(135deg, #fde68a, #facc15);
+  background: linear-gradient(135deg, #FFD873, #FFC83D);
 }
 
 .feature-icon-phone {
-  background: linear-gradient(135deg, #fcd34d, #fbbf24);
+  background: linear-gradient(135deg, #FFD36A, #FFBC2C);
 }
 
 .feature-icon-link {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  background: linear-gradient(135deg, #FFBC2C, #E0A723);
 }
 
 .feature-card h3 {
-  font-size: 1.3rem;
-  color: #1e3a5f;
-  margin-bottom: 12px;
-  font-weight: 600;
+  font-size: 1.35rem;
+  color: #1a2b45;
+  font-weight: 700;
+  margin-bottom: 14px;
 }
 
 .feature-card p {
@@ -182,32 +220,34 @@
 }
 
 /* ============================================================
-   TRUST SECTION
+   TRUST SECTION (Soft Navy Tint)
    ============================================================ */
+
 .landing-trust {
-  padding: 80px 20px;
-  background: #f8f9fc;
-  border-top: 1px solid rgba(0, 0, 0, 0.03);
+  padding: 90px 20px;
+  background: #f3f6fb;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .landing-trust h2 {
-  font-size: 2.1rem;
   text-align: center;
-  margin-bottom: 32px;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0A1A2F;
+  margin-bottom: 40px;
 }
 
 .trust-list {
-  max-width: 650px;
+  max-width: 700px;
   margin: 0 auto;
   list-style: none;
   padding: 0;
 }
 
 .trust-list li {
-  padding: 12px 0 12px 22px;
-  font-size: 1.05rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 14px 0 14px 26px;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
 }
 
@@ -215,49 +255,56 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 16px;
-  width: 10px;
-  height: 10px;
-  background: #facc15;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  background: #FFC83D;
   border-radius: 50%;
 }
 
 .highlight {
-  color: #7c651c;
-  font-weight: 600;
+  color: #8a6b1f;
+  font-weight: 700;
 }
 
 /* ============================================================
    ABOUT SECTION
    ============================================================ */
+
 .landing-about {
   max-width: 850px;
   margin: 0 auto;
-  padding: 70px 20px;
+  padding: 90px 20px;
 }
 
 .landing-about h2 {
-  font-size: 2.1rem;
   text-align: center;
-  margin-bottom: 24px;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 26px;
+  color: #0A1A2F;
   position: relative;
 }
 
 .landing-about h2::after {
   content: "";
-  width: 80px;
+  width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, #fbbf24, #facc15, #fde68a);
+  background: linear-gradient(
+    90deg,
+    #FFC83D,
+    #FFD36A,
+    #FFE49F
+  );
   display: block;
-  margin: 10px auto 0;
+  margin: 12px auto 0;
   border-radius: 999px;
 }
 
 .landing-about p {
   color: #444;
-  font-size: 1.1rem;
-  line-height: 1.65;
+  font-size: 1.15rem;
+  line-height: 1.7;
   text-align: center;
 }
 
